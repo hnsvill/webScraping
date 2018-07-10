@@ -1,10 +1,13 @@
+
+
+# def emailAText(emailBodyTextbg):
 import smtplib
 from creds import credentials
 
 gmailID = "hnsvill@gmail.com"
 gmailPwd = credentials(gmailID)
 recEmail = "3609044450@vtext.com"
-emailBody = "6pm.com/p/the-jetset-diaries-opal-mini-dress-lavender/product/9044544/color/427"
+emailBody = emailBodyTextbg
 
 try:
     server = smtplib.SMTP("smtp.gmail.com", 587)
@@ -16,3 +19,6 @@ except:
     print ("Something went wrong...")
 finally:
     print("Email sent")
+
+# emailAText("aVar")
+# print("all done!")

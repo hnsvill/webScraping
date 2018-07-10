@@ -1,12 +1,7 @@
-import smtplib
+#this document is for testing pieces of code
 
-gmailID = "hnsvill@gmail.com"
-gmailPwd = input("please enter app password: ")
+from creds import credentials
 
-server = smtplib.SMTP("smtp.gmail.com", 587)
-server.starttls()
-server.ehlo()
-server.login(gmailID, gmailPwd)
-print ("Something went wrong...")
-
-server.sendmail(gmailID, "3609044450@vtext.com", "Test message")
+email = "hnsvill@gmail.com"
+password = credentials(email)
+print(password)
