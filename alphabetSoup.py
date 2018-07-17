@@ -9,7 +9,6 @@ for alpha in alphabetSoup:
     pageHTML = requests.get(incUrl)
     convertedText = pageHTML.text
     soup = BeautifulSoup(convertedText, "html.parser")
-  
 
 
 for link in soup.find_all("span", {"class" : "button round5 shade2"}):

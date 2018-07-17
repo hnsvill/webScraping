@@ -18,5 +18,5 @@ def emailFromHnsvill(emailBodyTextbg):
     finally:
         print("Email sent")
 
-emailFromHnsvill("Test body of email")
+emailFromHnsvill("Ladies Computative Cupcakes")
 print("all done!")
