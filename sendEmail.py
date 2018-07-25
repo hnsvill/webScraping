@@ -13,10 +13,11 @@ def emailFromHnsvill(emailBodyTextbg):
         server.ehlo()
         server.login(gmailID, gmailPwd)
         server.sendmail(gmailID, recEmail, emailBody)
+        print("Email sent")
     except:
         print ("Something went wrong...")
-    finally:
-        print("Email sent")
 
-emailFromHnsvill("Ladies Computative Cupcakes")
+
+
+emailFromHnsvill("ACT-W is going well!")
 print("all done!")

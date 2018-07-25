@@ -12,9 +12,6 @@ soup = BeautifulSoup(convertedText, "html.parser")
 for elem in soup.find_all("div", attrs={"group":"checkitem"}):
     for child in elem.children:
         print(child.text)
-    
-    # for tm in elem.children
-    #     print(children)
-    # # print(elem.contents)
 
-print(soup.name + " " + "Success!")
+
+print("Success!")

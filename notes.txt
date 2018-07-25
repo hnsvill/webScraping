@@ -1,7 +1,0 @@
-Note: These notes will also be on my blog, currently residing on hnsvill.wixsite.com/blog
-
-
-The goal is to reaserch first if I can access the data my friend needs for her app, and then create a crawler to collect
-the desired data
-
-I am starting with Selenium
