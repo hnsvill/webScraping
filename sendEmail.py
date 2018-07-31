@@ -1,9 +1,9 @@
 def emailFromHnsvill(emailBodyTextbg):
     import smtplib
-    from creds import credentials
+    from credentials import creds
 
     gmailID = "hnsvill@gmail.com"
-    gmailPwd = credentials(gmailID)
+    gmailPwd = creds(gmailID)
     recEmail = "3609044450@vtext.com"
     emailBody = emailBodyTextbg
 
@@ -19,5 +19,5 @@ def emailFromHnsvill(emailBodyTextbg):
 
 
 
-emailFromHnsvill("ACT-W is going well!")
-print("all done!")
+# emailFromHnsvill("Credentials now removed from GitHub")
+# print("all done!")
