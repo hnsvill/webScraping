@@ -5,32 +5,12 @@ import urllib.robotparser
 import random
 import time
 
-robotsPath = "http://www.figurerealm.com/robots.txt"
-incUrl = "http://www.figurerealm.com/universe?index="
-# alphaSoup = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-alphaSoup = ["A", "B"]
-
-universePg = []
-yesScrape = []
-noScrape = []
-
-for alpha in alphaSoup:
-    # try:
-    if canScrape(robotsPath, incUrl + alpha) == True:
-        getPageLinks(incUrl + alpha)
-        print("tried visiting site")
-    else:
-        noScrape.append("http://www.figurerealm.com/" + incUrl + alpha)
-        # emailFromHnsvill("All done!")
-    # except:
-        # emailFromHnsvill("Something in scraper Went Wrong..")
-
-
-def canScrape(robotTxtFileURL, urlTxt):
+def spiderCanScrape(robotTxtFileURL, urlTxt):
     rp = urllib.robotparser.RobotFileParser()
     rp.set_url(robotTxtFileURL)
     rp.read()
     canFet = rp.can_fetch("*", urlTxt)
+    print (canFet)
     return canFet
 
 def containsString(inSearch, searchFor):
@@ -49,3 +29,31 @@ def getPageLinks(fullUrl):
             universePg.append(link.get("href"))
         elif containsString(link.get("href"), "actionfigure?") == True:
             yesScrape.append("http://www.figurerealm.com/" + link.get("href"))
+
+
+robotsPath = "http://www.figurerealm.com/robots.txt"
+incUrl = "http://www.figurerealm.com/universe?index="
+# alphaSoup = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+alphaSoup = ["A", "B"]
+
+universePg = []
+yesScrape = []
+noScrape = []
+
+for alpha in alphaSoup:
+    # try:
+    if spiderCanScrape(robotsPath, incUrl + alpha):
+        getPageLinks(incUrl + alpha)
+        print("tried visiting site")
+    else:
+        noScrape.append("http://www.figurerealm.com/" + incUrl + alpha)
+        # emailFromHnsvill("All done!")
+    # except:
+        # emailFromHnsvill("Something in scraper Went Wrong..")
+
+print ("universePg = ")
+print (universePg)
+print ("yesScrape = ")
+print (yesScrape)
+print ("noScrape = ")
+print (noScrape)

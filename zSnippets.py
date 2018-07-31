@@ -56,9 +56,22 @@ def testParent():
 
 # testParent()
 
-from alphabetSoup import canScrape
+# from alphabetSoup import spiderCanScrape
 
-robotsPath = "http://www.figurerealm.com/robots.txt"
-incUrl = "http://www.figurerealm.com/universe?index="
+# robotsPath = "http://www.figurerealm.com/robots.txt"
+# incUrl = "http://www.figurerealm.com/universe?index="
 
-print(canScrape(robotsPath, incUrl + "A"))
+# print(spiderCanScrape(robotsPath, incUrl + "A"))
+
+def retTry(arg):
+    if arg == "opt1":
+        return True
+    else:
+        return False
+
+# print(retTry("Option2"))
+
+if retTry("opt1") == True:
+    print("evaluated successfully")
+else:
+    print("did not eval")
