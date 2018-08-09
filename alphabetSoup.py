@@ -20,36 +20,41 @@ def containsString(inSearch, searchFor):
         return False
 
 def getPageLinks(fullUrl):
-    time.sleep(random.randint(60,120))
+    sleepytime = random.randint(20,45)
+    time.sleep(sleepytime)
+    print("sleeping for " + str(sleepytime) + "seconds")
     pageHTML = requests.get(fullUrl)
     convertedText = pageHTML.text
     soup = BeautifulSoup(convertedText, "html.parser")
     for link in soup.find_all("a"):
-        if containsString(link.get("href"), "universe?") == True:
-            universePg.append(link.get("href"))
-        elif containsString(link.get("href"), "actionfigure?") == True:
+        if containsString(link.get("href"), "universe?"):
+            universePg.append("http://www.figurerealm.com/" + link.get("href"))
+        elif containsString(link.get("href"), "actionfigure?") and "http://www.figurerealm.com/" + link.get("href") not in yesScrape:
             yesScrape.append("http://www.figurerealm.com/" + link.get("href"))
-
 
 robotsPath = "http://www.figurerealm.com/robots.txt"
 incUrl = "http://www.figurerealm.com/universe?index="
 # alphaSoup = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-alphaSoup = ["A", "B"]
+alphaSoup = ["B"]
 
 universePg = []
 yesScrape = []
 noScrape = []
 
 for alpha in alphaSoup:
-    # try:
-    if spiderCanScrape(robotsPath, incUrl + alpha):
-        getPageLinks(incUrl + alpha)
-        print("tried visiting site")
-    else:
-        noScrape.append("http://www.figurerealm.com/" + incUrl + alpha)
-        # emailFromHnsvill("All done!")
-    # except:
-        # emailFromHnsvill("Something in scraper Went Wrong..")
+    try:
+        if spiderCanScrape(robotsPath, incUrl + alpha):
+            getPageLinks(incUrl + alpha)
+            print("tried visiting site")
+        else:
+            noScrape.append("http://www.figurerealm.com/" + incUrl + alpha)
+    except:
+        emailFromHnsvill("Something in scraper Went Wrong..")
+
+for universeLink in universePg:
+    if spiderCanScrape(robotsPath, universeLink):
+        print(universeLink)
+        getPageLinks(universeLink)
 
 print ("universePg = ")
 print (universePg)
@@ -57,3 +62,5 @@ print ("yesScrape = ")
 print (yesScrape)
 print ("noScrape = ")
 print (noScrape)
+
+emailFromHnsvill("All done!")
