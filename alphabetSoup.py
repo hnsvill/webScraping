@@ -10,7 +10,6 @@ def spiderCanScrape(robotTxtFileURL, urlTxt):
     rp.set_url(robotTxtFileURL)
     rp.read()
     canFet = rp.can_fetch("*", urlTxt)
-    print (canFet)
     return canFet
 
 def containsString(inSearch, searchFor):
@@ -19,23 +18,34 @@ def containsString(inSearch, searchFor):
     else:
         return False
 
-def getPageLinks(fullUrl):
-    sleepytime = random.randint(20,45)
-    time.sleep(sleepytime)
-    print("sleeping for " + str(sleepytime) + "seconds")
-    pageHTML = requests.get(fullUrl)
+def cookSoup(definedURL):
+    pageHTML = requests.get(definedURL)
     convertedText = pageHTML.text
-    soup = BeautifulSoup(convertedText, "html.parser")
+    return BeautifulSoup(convertedText, "html.parser")
+
+def getPageLinks(fullUrl):
+    # # # time.sleep(random.randint(55,125))
+    soup = cookSoup(fullUrl)
     for link in soup.find_all("a"):
         if containsString(link.get("href"), "universe?"):
             universePg.append("http://www.figurerealm.com/" + link.get("href"))
         elif containsString(link.get("href"), "actionfigure?") and "http://www.figurerealm.com/" + link.get("href") not in yesScrape:
             yesScrape.append("http://www.figurerealm.com/" + link.get("href"))
 
+def getUniverseSeries(univURL):
+    soup = cookSoup(univURL)
+    for linkItem in soup.find_all("td"):
+        onclickStrTemp = str(linkItem.get("onclick"))
+        startOfOnClick = onclickStrTemp.find("'") + 1
+        endOfOnClick = len(onclickStrTemp) - 1
+        onclickStr = onclickStrTemp[startOfOnClick:endOfOnClick]
+        if containsString(onclickStr, "actionfigure?") and "http://www.figurerealm.com/" + onclickStr not in yesScrape:
+            yesScrape.append("http://www.figurerealm.com/" + onclickStr)
+
 robotsPath = "http://www.figurerealm.com/robots.txt"
 incUrl = "http://www.figurerealm.com/universe?index="
 # alphaSoup = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-alphaSoup = ["B"]
+alphaSoup = ["Y"]
 
 universePg = []
 yesScrape = []
@@ -43,7 +53,7 @@ noScrape = []
 
 for alpha in alphaSoup:
     try:
-        if spiderCanScrape(robotsPath, incUrl + alpha):
+        if spiderCanScrape(robotsPath, incUrl + alpha):  
             getPageLinks(incUrl + alpha)
             print("tried visiting site")
         else:
@@ -53,8 +63,7 @@ for alpha in alphaSoup:
 
 for universeLink in universePg:
     if spiderCanScrape(robotsPath, universeLink):
-        print(universeLink)
-        getPageLinks(universeLink)
+        getUniverseSeries(universeLink)
 
 print ("universePg = ")
 print (universePg)
@@ -63,4 +72,4 @@ print (yesScrape)
 print ("noScrape = ")
 print (noScrape)
 
-emailFromHnsvill("All done!")
+emailFromHnsvill("All done with Y!")
