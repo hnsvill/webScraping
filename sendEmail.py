@@ -18,6 +18,6 @@ def emailFromHnsvill(emailBodyTextbg):
         print ("Something went wrong...")
 
 
-
+emailFromHnsvill("Learned Linked Lists Today!!!")
 # emailFromHnsvill("Credentials now removed from GitHub")
 # print("all done!")

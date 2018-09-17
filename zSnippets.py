@@ -25,4 +25,10 @@ def testParent():
         print (link.get("href"))
     print (pgLinks)
 
-
+def containsString(inSearch, searchFor):
+    return searchFor in inSearch
+    # if searchFor in inSearch:
+    #     return True
+    # else:
+    #     return False
+print(containsString("computer", "cp"))

@@ -15,4 +15,4 @@ time.sleep(10)
 
 driver.quit()
 
-print()
+print("Selenium demonstration complete.")
